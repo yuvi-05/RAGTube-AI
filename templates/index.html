@@ -687,7 +687,7 @@
                     headers:{'Content-Type':'application/json'},
                     body:JSON.stringify({"query":question})
                 })
-                .then(response=> response.text())
+                .then(response=> response.json())
                 .then(data=>{
                     // Hide loading and show response with data
                     hideLoading();
@@ -761,7 +761,7 @@
             const responseText = document.getElementById('responseText');
             
             // Set the response data
-            responseText.textContent = data;
+            responseText.textContent = data["user_query"];
             
             // Show response container with fade in animation
             setTimeout(() => {

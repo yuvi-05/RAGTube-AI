@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,jsonify
 import json
 
 import requests
@@ -54,17 +54,33 @@ def embed():
     ------------------------------------------------------------
     users question : {query}
     find related chunks text which gives best answer to this question and summarize it , 
-    provide response in this paragraph format :- 
-    1.user question:..., 
-    2.summary(2-3 paragraph):..., 
-    3.video name = ..., 
-    4.timestamp = ..., 
+    provide response in json string format and dont mention anything about chunks :- 
+    "user_query":{query}, 
+    "summary"(2-3 paragraph):"summary", 
+    "video_name" : "video name", 
+    "timestamp" : "...seconds", 
     dont provide any other information or mention anything about chunk,
     '''
 
-    response = inference(prompt)
-    print (response,f"/n Similar videos: {new_df[['video_name']]}")
+    initial_response = inference(prompt)
+    dict_response = json.loads(initial_response)
     
-    return response
+    # with open ("json_response.json","w") as f:
+    #     json.dump(dict_response,f,indent=4)
+    #     response=f
+
+
+    # prompt_2 = f''' create json string ready to dump into variable from following string in format : 
+    # "user_query":"(user query)"
+    # "summary":"(summary)",
+    # "video_name":"(video name)"
+    # "timestamp":"(time stamp)"
+    # --------------------------------------------------------------
+    # string = {initial_response}
+    # '''
+    # response = inference(prompt_2)
+    print (type(dict_response))
+    
+    return jsonify(dict_response)
 
 app.run(debug=True)
