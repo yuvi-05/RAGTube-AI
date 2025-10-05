@@ -36,9 +36,13 @@ It not only summarizes the information but also provides **relevant YouTube vide
 🧠 How It Works
 
 1.The user submits a query through the web interface.
-2.The query is converted into an embedding using a model (like OpenAI or BGE-M3).
+
+2.The query is converted into an embedding using a model ( BGE-M3).
+
 3.Cosine similarity is computed against pre-stored document embeddings.
+
 4.The top results are passed to an LLM for summarization.
+
 5.The system returns:
  - A concise summary
  - A YouTube video link with an exact timestamp
