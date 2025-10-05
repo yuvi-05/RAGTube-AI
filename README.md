@@ -21,7 +21,7 @@ It not only summarizes the information but also provides **relevant YouTube vide
 
 1. **Clone this repository**
    ```bash
-   git clone https://github.com/<your-username>/ragtube-ai.git
+   git clone https://github.com/<yuvi-05>/ragtube-ai.git
    cd ragtube-ai
    
 2. Install dependencies
