@@ -53,7 +53,7 @@ def embed():
     {new_df[["video_name","start","text"]]}
     ------------------------------------------------------------
     users question : {query}
-    find related chunks text which gives best answer to this question and summarize it , 
+    find related chunks text which matches best with answer of this question and summarize it , 
     provide response in json string format and dont mention anything about chunks :- 
     "user_query":{query}, 
     "summary"(2-3 paragraph):"summary", 
@@ -64,6 +64,11 @@ def embed():
 
     initial_response = inference(prompt)
     dict_response = json.loads(initial_response)
+
+    
+    for i,time in enumerate(new_df["start"]):
+        if time == dict_response["timestamp"] :
+            dict_response["video_name"]=new_df["video_name"].iloc[i]
     
     # with open ("json_response.json","w") as f:
     #     json.dump(dict_response,f,indent=4)
@@ -79,7 +84,8 @@ def embed():
     # string = {initial_response}
     # '''
     # response = inference(prompt_2)
-    print (type(dict_response))
+    print ((dict_response))
+    print(new_df)
     
     return jsonify(dict_response)
 
