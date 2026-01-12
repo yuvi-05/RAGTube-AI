@@ -959,7 +959,14 @@
             // Populate the 4 divs with JSON response data
             document.getElementById('userQuery').textContent = data.user_query || '';
             document.getElementById('summary').textContent = data.summary || '';
-            document.getElementById('videoName').textContent = data.video_name || '';
+            // show clickable video link if provided
+            const videoNameEl = document.getElementById('videoName');
+            if (data.video_link) {
+                const name = data.video_name || data.video_link;
+                videoNameEl.innerHTML = `<a href="${data.video_link}" target="_blank" rel="noopener noreferrer">${name}</a>`;
+            } else {
+                videoNameEl.textContent = data.video_name || '';
+            }
             document.getElementById('timestamp').textContent = data.timestamp || '';
             
             // Show response container with fade in animation
